@@ -130,43 +130,87 @@ public class CrudGPU {
 	{
 		cls();
 		System.out.println(">>Excluir GPU");
-		System.out.println(">>Digite o ID da GPU>>");
-		xid = Integer.parseInt(Scanf("ID da GPU: "));
-		int tam = listaliga.size();
-		for(int i=0; i<tam; i++)
+		ListaremLinha();
+		int ultimo = listaliga.size()-1;
+		xopcao = Scanf("Digite o ID da GPU: 0-"+ultimo+": ");
+		try 
 		{
-			GPU aux = (GPU)listaliga.get(i);
-			if(aux.getId() == xid)
+			int reg=Integer.parseInt(xopcao);
+			if(reg >= 0 && reg <= ultimo)
 			{
-				System.out.println("Dados da GPU:");
-				System.out.println("ID: "+aux.getId());
-				System.out.println("Nome: "+aux.getNome());
-				System.out.println("Fabricante: "+aux.getFab());
-				System.out.println("Memoria: "+aux.getMem());
-				System.out.println("Preço: "+aux.getPreco());
-				xopcao = Scanf("Confirmar exclusão(s/n)?");
-				if(xopcao.equals("s") || xopcao.equals("S"))
-				{
-					listaliga.remove(i);
-					MSG("Excluido com sucesso!");
-				}
-				else
-				{
-					MSG("Exclusão cancelada!");
-				}
-				return;
+				listaliga.remove(reg);
+				MSG("Registro excluído com sucesso!! <enter>");
 			}
+			else
+			{
+				throw new Exception();
+			}
+		} catch(Exception e)
+		{
+			MSG("Valor inválido!! <enter>");
 		}
-		MSG("ID não encontrado!");
 	}
 	
+	public static void AlterandoDados(int pos){
+		GPU aux = (GPU)listaliga.get(pos);
+		while(true)
+		{
+			cls();
+			System.out.println(">>Alterando dados da GPU");
+			System.out.println("Registro.........="+pos);
+			System.out.println("(1) Nome.............="+aux.getNome());
+			System.out.println("(2) Fabricante.......="+aux.getFab());
+			System.out.println("(3) Memoria..........="+aux.getMem());
+			System.out.println("(4) Preço............="+aux.getPreco());
+			System.out.println("(5) Fim das alternativas");
+			xopcao = Scanf("<<Qual campo vai alterar?");
+			if(xopcao.equals("5")) break;
+			if(xopcao.equals("1"))
+			{
+				xnome = Scanf("Digite o novo nome: ");
+				aux.setNome(xnome);
+			}
+			if(xopcao.equals("2"))
+			{
+				xfab = Scanf("Digite o novo fabricante: ");
+				aux.setFab(xfab);
+			}
+			if(xopcao.equals("3"))
+			{
+				xmem = Scanf("Digite a nova memoria: ");
+				try {
+					mem = Integer.parseInt(xmem);
+				}catch(Exception errmem)
+				{
+					MSG("Valor inválido!! <enter>"); mem = 1;
+				}
+				aux.setMem(mem);
+			}
+			if(xopcao.equals("4"))
+			{
+				xpreco = Scanf("Digite o novo preço: ");
+				try {
+					preco = Double.parseDouble(xpreco);
+				}catch(Exception errpreco)
+				{
+					MSG("Valor inválido!! <enter>"); preco = 1.00;
+				}
+				aux.setPreco(preco);
+			}
+
+
+			
+
+		}
+		
+	}
 	public static void Alterar()
 	{
 		cls();
 		System.out.println(">>Alterar GPU");
-		System.out.println(">>Digite o ID da GPU>>");
-		xid = Integer.parseInt(Scanf("ID da GPU: "));
-		int tam = listaliga.size();
+		ListaremLinha();
+		int tam = listaliga.size()-1;
+		xopcao = Scanf("Digite o ID da GPU: 0-"+tam+": ");
 	}
 	
 	public static void Listar()

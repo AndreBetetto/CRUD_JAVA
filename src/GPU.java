@@ -12,7 +12,7 @@ class GPU {
 		setMem(0);
 		setPreco(0.0);
 	}
-	
+	//
 	public void setId(int i)
 	{
 		this.id_gpu = i;
