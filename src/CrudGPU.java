@@ -169,11 +169,13 @@ public class CrudGPU {
 			{
 				xnome = Scanf("Digite o novo nome: ");
 				aux.setNome(xnome);
+				continue;
 			}
 			if(xopcao.equals("2"))
 			{
 				xfab = Scanf("Digite o novo fabricante: ");
 				aux.setFab(xfab);
+				continue;
 			}
 			if(xopcao.equals("3"))
 			{
@@ -185,6 +187,7 @@ public class CrudGPU {
 					MSG("Valor inválido!! <enter>"); mem = 1;
 				}
 				aux.setMem(mem);
+				continue;
 			}
 			if(xopcao.equals("4"))
 			{
@@ -197,10 +200,7 @@ public class CrudGPU {
 				}
 				aux.setPreco(preco);
 			}
-
-
-			
-
+			MSG("opcao invalida!"+xopcao);
 		}
 		
 	}
@@ -208,9 +208,32 @@ public class CrudGPU {
 	{
 		cls();
 		System.out.println(">>Alterar GPU");
+
+		if(listaliga.size()==0)
+		{
+			MSG("Lista vazia!! <enter>");
+			return;
+		}
 		ListaremLinha();
 		int tam = listaliga.size()-1;
 		xopcao = Scanf("Digite o ID da GPU: 0-"+tam+": ");
+
+		try
+	    {
+			int reg=Integer.parseInt(xopcao);
+			if(reg >= 0 && reg <= tam)
+			{
+				AlterandoDados(reg);
+				MSG("Registro alterado com sucesso!! <enter>");
+			}
+			else
+			{
+				throw new Exception();
+			}
+		} catch(Exception e)
+		{
+			MSG("Valor inválido!! <enter>");
+		}
 	}
 	
 	public static void Listar()
